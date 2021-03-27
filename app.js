@@ -24,11 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   if (!app.db) {
-    console.log("Connecting to Server")
     MongoClient.connect(url).then(client => {
-      console.log("Connected correctly to server");
       const db = client.db(dbName);
-      console.log("Getting the DB Object");
       app.db = db;
       next()
     }, error => {
